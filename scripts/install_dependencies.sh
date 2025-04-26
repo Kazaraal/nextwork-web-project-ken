@@ -1,7 +1,5 @@
 #!/bin/bash
-sudo yum install tomcat -y
-sudo yum -y install httpd
-sudo yum install -y mod_proxy mod_proxy_http
+sudo yum install -y tomcat httpd mod_proxy mod_proxy_http
 sudo cat << EOF > /etc/httpd/conf.d/tomcat_manager.conf
 <VirtualHost *:80>
   ServerAdmin root@localhost
