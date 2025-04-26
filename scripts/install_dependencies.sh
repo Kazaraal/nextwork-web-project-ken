@@ -1,5 +1,7 @@
 #!/bin/bash
 sudo yum install -y tomcat httpd mod_proxy mod_proxy_http
+
+# Create Apache VirtualHost to proxy to Tomcat
 sudo cat << EOF > /etc/httpd/conf.d/tomcat_manager.conf
 <VirtualHost *:80>
   ServerAdmin root@localhost
