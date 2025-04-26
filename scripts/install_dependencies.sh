@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo yum install -y java-1.8.0-amazon-corretto-devel
 sudo yum install -y tomcat httpd mod_proxy mod_proxy_http
 
 # Create Apache VirtualHost to proxy to Tomcat
