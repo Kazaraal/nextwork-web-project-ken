@@ -1,4 +1,5 @@
 #!/bin/bash
-sudo systemctl enable --now tomcat.service
-sudo systemctl enable --now httpd.service
 
+# Start Tomcat and Apache
+sudo systemctl start tomcat.service
+sudo systemctl start httpd.service
