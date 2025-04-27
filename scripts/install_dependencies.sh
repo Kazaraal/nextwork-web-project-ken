@@ -26,7 +26,6 @@ sudo chown -R tomcat: /opt/tomcat
 sudo chmod -R +x /opt/tomcat/bin
 
 # Create systemd service
-
 sudo bash -c 'cat > /etc/systemd/system/tomcat.service <<EOF
 [Unit]
 Description=Apache Tomcat Web Application Container
@@ -38,12 +37,12 @@ Type=forking
 User=tomcat
 Group=tomcat
 
-Environment=\"JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto\"
-Environment=\"CATALINA_PID=/opt/tomcat/temp/tomcat.pid\"
-Environment=\"CATALINA_HOME=/opt/tomcat\"
-Environment=\"CATALINA_BASE=/opt/tomcat\"
-Environment=\"CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC\"
-Environment=\"JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom\"
+Environment="JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto"
+Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
+Environment="CATALINA_HOME=/opt/tomcat"
+Environment="CATALINA_BASE=/opt/tomcat"
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+Environment="JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"
 
 ExecStart=/opt/tomcat/bin/startup.sh
 ExecStop=/opt/tomcat/bin/shutdown.sh
@@ -79,3 +78,15 @@ EOF'
 
 # Enable and start Apache HTTPD service
 sudo systemctl enable --now httpd
+
+
+######################################################################################################
+###################################### CODEDEPLOY AGENT ##############################################
+
+# Install CodeDeploy agent
+cd /home/ec2-user
+sudo yum install -y ruby
+wget https://aws-codedeploy-eu-west-2.s3.eu-west-2.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+sudo systemctl enable --now codedeploy-agent
